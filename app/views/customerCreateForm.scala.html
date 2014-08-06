@@ -1,0 +1,54 @@
+@(customerForm: Form[Customer])
+
+@import helper._
+
+@main(title = "受注管理システム - 顧客情報登録") {
+
+<!-- ヘッダー -->
+@header()
+
+<div class="row">
+  <div class="container">
+  
+    <!-- サイドメニュー -->
+    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="/customers/search">顧客情報一覧（検索/更新/削除）</a></li>
+            <li><a href="/customers/create">顧客情報登録</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- コンテンツ -->
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+      <div class="row">
+      
+        <!-- 見出し -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1>顧客情報登録</h1>
+        </div>
+        
+        <!-- フォーム -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          @form(routes.CustomerController.create()) {
+            <fieldset>
+              <input type="hidden" name="ID" value="0">
+              @inputText(customerForm("name"), '_label -> "顧客氏名", 'size -> 30)
+              @inputText(customerForm("email"), '_label -> "メールアドレス",'type -> "email", 'size -> 30)
+              @inputText(customerForm("tel"), '_label -> "電話番号", 'size -> 30)
+              @inputText(customerForm("address"), '_label -> "住所", 'size -> 30)
+              @inputText(customerForm("comment"), '_label -> "備考", 'size -> 30)
+            </fieldset>
+            <div class="actions">
+              <input type="submit" class="btn btn-primary">
+              <a href="/customers/search" class="btn btn-danger">キャンセル</a>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+ </div>
+}

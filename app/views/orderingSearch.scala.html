@@ -1,0 +1,80 @@
+@(word: String, orderings: List[(Long, Long, Long, String, String, String, String, String, Long, String, Long, String, Long, String)])
+
+@import java.util.Date
+
+@main(title = "受発注管理システム - 受注情報一覧") {
+
+<!-- ヘッダー -->
+@header()
+
+<div class="row">
+  <div class="container">
+
+    <!-- サイドメニュー -->
+    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="/orderings/search">受注情報一覧（検索/削除）</a></li>
+            <li><a href="/orderings/create">受注登録</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- コンテンツ -->
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+      <div class="row">
+
+        <!-- 見出し -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1>受注情報一覧（検索/削除）</h1> 
+        </div>
+
+        <!-- 検索フォーム -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @helper.form(action=routes.OrderingController.search()) {
+          <input type="search" name="word" value="@word">
+          <input type="submit" value="キーワード検索" class="byn btn-primary">
+        }
+        </div>
+
+        <!-- テーブル -->
+        <div class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table table-bordered table-striped ">
+            <thead>
+              <tr>
+                <th>受注番号</th>
+                <th>受注日時</th>
+                <th>顧客氏名</th>
+                <th>メールアドレス</th>
+                <th>商品名</th>
+                <th>単価</th>
+                <th>個数</th>
+                <th>合計価格</th>
+                <th>備考</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            @orderings.map { ordering =>
+              <tr>
+                <td align="right">@("%9d".format(ordering._1))</td>
+                <td align="right">@("%tY/%<tm/%<td %<tH:%<tM:%<tS".format(new Date(ordering._2)))</td>
+                <td>@ordering._4</td>
+                <td>@ordering._5</td>
+                <td>@ordering._10</td>
+                <td align="right">@("%,d".format(ordering._11))</td>
+                <td align="right">@("%,d".format(ordering._13))</td>
+                <td align="right">@("%,d".format((ordering._11 * ordering._13)))</td>
+                <td>@ordering._14</td>
+                <td align="center"><input type="button" class="btn btn-danger" value="削除" onClick='if(confirm("本当に削除してよろしいですか？")) {location.href="/orderings/@ordering._1/remove"}'></td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+ </div>
+}

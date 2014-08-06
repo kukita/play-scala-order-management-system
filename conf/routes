@@ -1,0 +1,59 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#
+# Customers Management
+#
+
+# Create customer infomation.
+GET     /customers/create           controllers.CustomerController.showCreateForm()
+POST    /customers/create           controllers.CustomerController.create()
+
+# Search customer infomation.
+GET     /customers/search           controllers.CustomerController.search(word: String ?= "")
+
+# Update customer infomation.
+GET     /customers/:id/update       controllers.CustomerController.showUpdateForm(id: Long)
+POST    /customers/:id/update       controllers.CustomerController.update(id: Long)
+
+# Remove customer infomation
+GET     /customers/:id/remove       controllers.CustomerController.remove(id: Long)
+
+#
+# Items Management
+#
+
+# Create item infomation.
+GET     /items/create               controllers.ItemController.showCreateForm()
+POST    /items/create               controllers.ItemController.create()
+
+# Search item infomation.
+GET     /items/search               controllers.ItemController.search(word: String ?= "")
+
+# Update item infomation.
+GET     /items/:id/update           controllers.ItemController.showUpdateForm(id: Long)
+POST    /items/:id/update           controllers.ItemController.update(id: Long)
+
+# Remove item infomation.
+GET     /items/:id/remove           controllers.ItemController.remove(id: Long)
+
+#
+# Orderings Management
+#
+
+# Create ordering infomation.
+GET     /orderings/create           controllers.OrderingController.showCreateForm()
+POST    /orderings/create           controllers.OrderingController.create()
+
+# Search ordering infomation.
+GET     /orderings/search           controllers.OrderingController.search(word: String ?= "")
+
+# Remove ordering infomation.
+GET     /orderings/:id/remove       controllers.OrderingController.remove(id: Long)

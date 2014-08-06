@@ -1,0 +1,35 @@
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">受注管理システム</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav" role="menu">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">顧客情報管理</a>
+          <ul class="dropdown-menu">
+            <li><a role="menuitem" href="/customers/search">顧客情報一覧（検索/更新/削除）</a></li>
+            <li><a role="menuitem" href="/customers/create">顧客情報登録</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">商品情報管理</a>
+          <ul class="dropdown-menu">
+            <li><a href="/items/search">商品情報一覧（検索/更新/削除）</a></li>
+            <li><a href="/items/create">商品情報登録</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">受注管理</a>
+          <ul class="dropdown-menu">
+            <li><a href="/orderings/search">受注情報一覧（検索/削除）</a></li>
+            <li><a href="/orderings/create">受注登録</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

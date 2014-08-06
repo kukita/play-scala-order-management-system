@@ -1,0 +1,75 @@
+@(word: String, customers: List[Customer])
+
+@main(title = "受注管理システム - 顧客情報一覧（検索/更新/削除）") {
+ 
+<!-- ヘッダー -->
+@header()
+
+<div class="row">
+  <div class="container">
+  
+    <!-- サイドメニュー -->
+    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="/customers/search">顧客情報一覧（検索/更新/削除）</a></li>
+            <li><a href="/customers/create">顧客情報登録</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- コンテンツ -->
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+      <div class="row">
+        
+        <!-- 見出し -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1>顧客情報一覧（検索/更新/削除）</h1> 
+        </div>
+        
+        <!-- 検索フォーム -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @helper.form(action=routes.CustomerController.search()) {
+          <input type="search" name="word" value="@word">
+          <input type="submit" value="キーワード検索" class="byn btn-primary">
+        }
+        </div>
+        
+        <!-- テーブル -->
+        <div class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table table-bordered table-striped ">
+            <thead>
+              <tr>
+                <th>顧客番号</th>
+                <th>顧客氏名</th>
+                <th>メールアドレス</th>
+                <th>電話番号</th>
+                <th>住所</th>
+                <th>備考</th>
+                <th align="center"></th>
+              </tr>
+            </thead>
+            <tbody>
+            @customers.map { customer =>
+              <tr>
+                <td align="right">@("%9d".format(customer.ID))</td>
+                <td>@customer.name</td>
+                <td>@customer.email</td>
+                <td>@customer.tel</td>
+                <td>@customer.address</td>
+                <td>@customer.comment</td>
+                <td align="center">
+                  <a href="/customers/@customer.ID/update" class="btn btn-primary">更新</a>
+                  <input type="button" class="btn btn-danger" value="削除" onClick='if(confirm("本当に削除してよろしいですか？")) {location.href="/customers/@customer.ID/remove"}'>
+                </td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+ </div>
+}
